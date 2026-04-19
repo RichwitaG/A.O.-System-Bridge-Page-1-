@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Operator System — You're Just Getting Started</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand-bg: #0a0a0a;
+      --brand-surface: #111111;
+      --brand-surface-2: #181818;
+      --brand-border: rgba(255,255,255,0.08);
+      --brand-border-bright: rgba(255,255,255,0.16);
+      --brand-accent: #FF5C35;
+      --brand-accent-dim: rgba(255,92,53,0.10);
+      --brand-white: #F5F3EE;
+      --brand-muted: rgba(245,243,238,0.45);
+      --brand-muted-2: rgba(245,243,238,0.25);
+      --font-display: 'Syne', sans-serif;
+      --font-serif: 'Instrument Serif', serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--brand-bg);
+      color: var(--brand-white);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 32px 72px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      background: var(--brand-accent-dim);
+      border: 0.5px solid rgba(255,92,53,0.3);
+      border-radius: 2px;
+      padding: 5px 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 58px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--brand-white);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .serif-word {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--brand-accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--brand-muted);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(90deg, var(--brand-accent) 0%, transparent 60%);
+      margin: 48px 0 0;
+      opacity: 0.4;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 32px;
+      border-top: 0.5px solid var(--brand-border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-muted-2);
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--brand-white);
+    }
+
+    .section p {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--brand-muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── MIRROR LIST ── */
+    .mirror-list {
+      list-style: none;
+      margin: 20px 0 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mirror-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--brand-white);
+      line-height: 1.5;
+    }
+
+    .mirror-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-accent);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 2px solid var(--brand-accent);
+      padding: 14px 20px;
+      margin: 24px 0;
+      background: var(--brand-accent-dim);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--brand-white);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .pull-quote .sub {
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 12px;
+      color: var(--brand-muted);
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── TRUTH BLOCK ── */
+    .truth-block {
+      background: var(--brand-surface);
+      border: 0.5px solid var(--brand-border-bright);
+      border-radius: 4px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+
+    .truth-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-white);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .rush-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rush-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--brand-surface-2);
+      border: 0.5px solid var(--brand-border);
+      border-radius: 3px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: var(--font-mono);
+      color: var(--brand-muted);
+      letter-spacing: 0.01em;
+    }
+
+    .rush-x {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255,92,53,0.15);
+      border: 0.5px solid rgba(255,92,53,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rush-x svg { width: 8px; height: 8px; }
+
+    .truth-close {
+      font-size: 14px;
+      color: var(--brand-muted);
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    /* ── FOCUS BLOCK ── */
+    .focus-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .focus-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--brand-surface);
+      border: 0.5px solid var(--brand-border);
+      border-radius: 3px;
+      padding: 16px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .focus-item:hover { border-color: var(--brand-border-bright); }
+
+    .focus-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--brand-accent);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      width: 24px;
+    }
+
+    .focus-text {
+      font-size: 15px;
+      color: var(--brand-white);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .focus-sub {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--brand-muted);
+      margin-top: 3px;
+      letter-spacing: 0.02em;
+      font-weight: 400;
+    }
+
+    /* ── DIRECTION ── */
+    .direction-stat {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--brand-white);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+      border-top: 0.5px solid var(--brand-border);
+      text-align: center;
+    }
+
+    .cta-pre {
+      font-size: 15px;
+      color: var(--brand-muted);
+      line-height: 1.7;
+      max-width: 440px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--brand-accent);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .cta-btn:active { transform: scale(0.98); }
+    .cta-btn svg { width: 16px; height: 16px; }
+
+    .cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--brand-muted-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .cta-ghost:hover { color: var(--brand-muted); }
+
+    .cta-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--brand-muted-2);
+      letter-spacing: 0.08em;
+      margin-top: 24px;
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.5s ease both; }
+    .section:nth-child(1) { animation: fadeUp 0.5s ease 0.06s both; }
+    .section:nth-child(2) { animation: fadeUp 0.5s ease 0.10s both; }
+    .section:nth-child(3) { animation: fadeUp 0.5s ease 0.14s both; }
+    .section:nth-child(4) { animation: fadeUp 0.5s ease 0.18s both; }
+    .section:nth-child(5) { animation: fadeUp 0.5s ease 0.22s both; }
+    .section:nth-child(6) { animation: fadeUp 0.5s ease 0.26s both; }
+    .cta-section { animation: fadeUp 0.5s ease 0.30s both; }
+
+    @media (max-width: 520px) {
+      .hero { padding: 56px 20px 52px; }
+      .section { padding: 44px 20px; }
+      .cta-section { padding: 48px 20px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">AI Operator System — Level 1</div>
+    <h1>You're Just <span class="serif-word">Getting Started.</span></h1>
+    <p class="hero-sub">And that's exactly where you should be.</p>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- MIRROR -->
+  <div class="section">
+    <div class="section-label">Where you are right now</div>
+    <h2>Right now, you're likely…</h2>
+    <ul class="mirror-list">
+      <li>Exploring AI for the first time</li>
+      <li>Testing basic prompts</li>
+      <li>Learning what's possible</li>
+      <li>Trying to understand how it fits into your work</li>
+    </ul>
+  </div>
+
+  <!-- REFRAME -->
+  <div class="section">
+    <div class="section-label">The reframe</div>
+    <h2>There's nothing wrong with where you are.</h2>
+    <div class="pull-quote">
+      <p>This is where everyone starts.</p>
+      <p class="sub">No exceptions. No shortcuts past this stage.</p>
+    </div>
+    <p>The people getting the most out of AI right now didn't skip this part. They moved through it — and it's what made everything that came after stick.</p>
+  </div>
+
+  <!-- TRUTH -->
+  <div class="section">
+    <div class="section-label">The honest truth</div>
+    <div class="truth-block">
+      <p class="truth-heading">Jumping straight into advanced territory before you're ready will only slow you down.</p>
+      <div class="rush-list">
+        <div class="rush-item">
+          <div class="rush-x"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#FF5C35" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Automation
+        </div>
+        <div class="rush-item">
+          <div class="rush-x"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#FF5C35" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Systems
+        </div>
+        <div class="rush-item">
+          <div class="rush-x"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#FF5C35" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          Advanced workflows
+        </div>
+      </div>
+      <p class="truth-close">None of that is accessible yet — and trying to force it will just create frustration. The foundation comes first.</p>
+    </div>
+  </div>
+
+  <!-- WHAT YOU NEED -->
+  <div class="section">
+    <div class="section-label">What to focus on</div>
+    <h2>Your attention right now should go here.</h2>
+    <div class="focus-grid">
+      <div class="focus-item">
+        <div class="focus-num">01</div>
+        <div>
+          <div class="focus-text">Learn how to think with AI</div>
+          <div class="focus-sub">Understanding intent, context, and how to frame what you need</div>
+        </div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-num">02</div>
+        <div>
+          <div class="focus-text">Learn how to guide outputs</div>
+          <div class="focus-sub">Shaping responses rather than just accepting the first result</div>
+        </div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-num">03</div>
+        <div>
+          <div class="focus-text">Build basic consistency</div>
+          <div class="focus-sub">Getting reliable results before worrying about speed or scale</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECTION -->
+  <div class="section">
+    <div class="section-label">Your best next step</div>
+    <p class="direction-stat">Don't worry about systems yet.<br/>Focus on becoming <span style="color: var(--brand-accent); font-style: normal; font-family: var(--font-display); font-weight: 800;">comfortable</span> first.</p>
+    <p>Once that foundation is there, everything gets easier — and faster. The people who try to skip this stage are the same ones who end up starting over later. Don't be that person.</p>
+    <div class="pull-quote" style="margin-top: 24px;">
+      <p>Fluency before systems. Always.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p class="cta-pre">You're in the right place. Take your time, explore what's possible, and come back when you're ready to build.</p>
+    <a class="cta-btn" href="YOUR_RESOURCE_LINK_HERE" target="_blank" rel="noopener noreferrer">
+      Keep Exploring
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <br/>
+    <p class="cta-sub">AI Operator System — No fluff. Just systems.</p>
+  </div>
+
+</body>
+</html>
